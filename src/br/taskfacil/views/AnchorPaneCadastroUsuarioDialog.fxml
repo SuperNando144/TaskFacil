@@ -33,12 +33,12 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <TextField fx:id="textFieldEmail" onInputMethodTextChanged="#verificateTextFieldEmail" prefHeight="25.0" prefWidth="219.0" promptText="           " GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="textFieldEmail" prefHeight="25.0" prefWidth="219.0" promptText="           " GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="textFieldSenha" prefHeight="22.0" prefWidth="293.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <Group layoutX="114.0" layoutY="124.0" />
-      <Button fx:id="buttonCancelar" layoutX="205.0" layoutY="99.0" mnemonicParsing="false" text="Cancelar" />
+      <Button fx:id="buttonCancelar" layoutX="205.0" layoutY="99.0" mnemonicParsing="false" onAction="#handleButtonCancelar" text="Cancelar" />
       <Button fx:id="buttonConfirmar" layoutX="108.0" layoutY="102.0" mnemonicParsing="false" text="Confirmar" />
    </children>
 </AnchorPane>

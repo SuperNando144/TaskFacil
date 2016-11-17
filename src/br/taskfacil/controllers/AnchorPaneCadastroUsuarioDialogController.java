@@ -1,18 +1,23 @@
 package br.taskfacil.controllers;
 
+import java.net.URL;
+import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import br.taskfacil.models.User;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class AnchorPaneCadastroUsuarioDialogController {
+public class AnchorPaneCadastroUsuarioDialogController implements Initializable {
 	@FXML
-	private TextField textFieldEmail;
+	private TextField textFieldEmail = new TextField();
 	@FXML
 	private TextField textFieldSenha;
 	@FXML
@@ -56,9 +61,28 @@ public class AnchorPaneCadastroUsuarioDialogController {
 		this.dialogStage.close();
 	}
 
-	@FXML
-	public void verificateTextFieldEmail() {
-		if (!validate(textFieldEmail.getText())) {
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		//Criação de Evento quando o TextField não está selecionado pelo usuário
+		textFieldEmail.focusedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue,
+					Boolean newPropertyValue) {
+				if (newPropertyValue) {
+					System.out.println("Textfield on focus");
+				} else {
+					verificateEmail(textFieldEmail.getText());
+					System.out.println("Textfield out focus");
+				}
+			}
+		});
+
+	}
+	
+	//Métodos da expressão regular do E-mail
+	public void verificateEmail(String email) {
+		if (!validate(email)) {
 
 			Alert errorAlert = new Alert(Alert.AlertType.ERROR);
 			errorAlert.setContentText("Por favor insira um e-mail válido!");
