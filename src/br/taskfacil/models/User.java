@@ -14,6 +14,16 @@ public class User {
 	private String email;
 	@Column(length=64)
 	private String password;
+	
+	public User(String email, String password) {
+		super();
+		this.email = email;
+		this.password = password;
+	}
+	
+	public User(){
+		this.id = -1L;
+	}
 
 	public Long getId() {
 		return id;

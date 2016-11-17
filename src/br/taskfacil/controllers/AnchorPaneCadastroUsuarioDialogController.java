@@ -5,13 +5,16 @@ import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import br.taskfacil.dao.UserDAO;
 import br.taskfacil.models.User;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -19,7 +22,7 @@ public class AnchorPaneCadastroUsuarioDialogController implements Initializable 
 	@FXML
 	private TextField textFieldEmail = new TextField();
 	@FXML
-	private TextField textFieldSenha;
+	private PasswordField passwordFieldSenha;
 	@FXML
 	private Button buttonConfirmar;
 	@FXML
@@ -28,8 +31,9 @@ public class AnchorPaneCadastroUsuarioDialogController implements Initializable 
 	private Stage dialogStage;
 	private boolean buttonConfirmarClicked = false;
 	private User user;
-	public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",
-			Pattern.CASE_INSENSITIVE);
+	private UserDAO dao = new UserDAO();
+	private static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern
+			.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
 	public Stage getDialogStage() {
 		return dialogStage;
@@ -56,15 +60,23 @@ public class AnchorPaneCadastroUsuarioDialogController implements Initializable 
 	}
 
 	@FXML
+	public void handleButtonConfirmar() {
+		if(verificateEmail(textFieldEmail.getText())){
+			user = new User(textFieldEmail.getText(), passwordFieldSenha.getText());
+			dao.insert(user);
+		}
+	}
+
+	@FXML
 	public void handleButtonCancelar() {
 		this.buttonConfirmarClicked = false;
 		this.dialogStage.close();
 	}
 
-	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		//Criação de Evento quando o TextField não está selecionado pelo usuário
+		// Criação de Evento quando o TextField não está selecionado pelo
+		// usuário
 		textFieldEmail.focusedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue,
@@ -79,14 +91,17 @@ public class AnchorPaneCadastroUsuarioDialogController implements Initializable 
 		});
 
 	}
-	
-	//Métodos da expressão regular do E-mail
-	public void verificateEmail(String email) {
+
+	// Métodos da expressão regular do E-mail
+	public boolean verificateEmail(String email) {
 		if (!validate(email)) {
 
 			Alert errorAlert = new Alert(Alert.AlertType.ERROR);
 			errorAlert.setContentText("Por favor insira um e-mail válido!");
 			errorAlert.show();
+			return false;
+		} else {
+			return true;
 		}
 	}
 
