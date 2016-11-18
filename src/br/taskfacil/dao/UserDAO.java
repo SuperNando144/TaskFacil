@@ -39,7 +39,7 @@ public class UserDAO {
 
 	public List<User> findAll() {
 		List<User> list;
-		Query query = manager.createQuery("Select u from Users u");
+		Query query = manager.createQuery("Select u from User u");
 		list = query.getResultList();
 
 		return list;

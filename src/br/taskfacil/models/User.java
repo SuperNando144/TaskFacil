@@ -8,21 +8,32 @@ import javax.persistence.Id;
 
 @Entity
 public class User {
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(length=64)
+	@Column(length = 64)
+	private String nome;
+	@Column(length = 64)
 	private String email;
-	@Column(length=64)
+	@Column(length = 64)
 	private String password;
-	
-	public User(String email, String password) {
-		super();
+
+	public User(String nome, String email, String password) {
+		this.nome = nome;
 		this.email = email;
 		this.password = password;
 	}
-	
-	public User(){
+
+	public User() {
 		this.id = -1L;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public Long getId() {

@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -52,8 +53,8 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
+                  <PasswordField fx:id="passwordFieldSenha" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextField fx:id="textFieldEmail" GridPane.columnIndex="1" />
-                  <TextField fx:id="textFieldSenha" prefHeight="9.0" prefWidth="293.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
             </GridPane>
             <Button fx:id="buttonCriarConta" layoutX="83.0" layoutY="145.0" mnemonicParsing="false" onAction="#handleButtonCriarConta" prefHeight="53.0" prefWidth="94.0" text="Criar conta">

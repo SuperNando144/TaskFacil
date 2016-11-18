@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="136.0" prefWidth="354.0" xmlns="http://javafx.com/javafx/8.0.101" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.taskfacil.controllers.AnchorPaneCadastroUsuarioDialogController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="151.0" prefWidth="357.0" xmlns="http://javafx.com/javafx/8.0.101" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.taskfacil.controllers.AnchorPaneCadastroUsuarioDialogController">
    <children>
-      <GridPane layoutX="14.0" prefHeight="90.0" prefWidth="315.0">
+      <GridPane layoutX="15.0" layoutY="14.0" prefHeight="90.0" prefWidth="315.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="173.0" minWidth="10.0" prefWidth="65.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="293.0" minWidth="10.0" prefWidth="293.0" />
@@ -34,12 +34,18 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <TextField fx:id="textFieldEmail" prefHeight="25.0" prefWidth="219.0" promptText="           " GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="Nome">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <TextField fx:id="textFieldNome" prefHeight="25.0" prefWidth="219.0" promptText="           " GridPane.columnIndex="1" />
+            <TextField fx:id="textFieldEmail" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <PasswordField fx:id="passwordFieldSenha" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <Group layoutX="114.0" layoutY="124.0" />
-      <Button fx:id="buttonCancelar" layoutX="205.0" layoutY="99.0" mnemonicParsing="false" onAction="#handleButtonCancelar" text="Cancelar" />
-      <Button fx:id="buttonConfirmar" layoutX="108.0" layoutY="102.0" mnemonicParsing="false" onAction="#handleButtonConfirmar" text="Confirmar" />
+      <Button fx:id="buttonCancelar" layoutX="200.0" layoutY="111.0" mnemonicParsing="false" onAction="#handleButtonCancelar" text="Cancelar" />
+      <Button fx:id="buttonConfirmar" layoutX="103.0" layoutY="111.0" mnemonicParsing="false" onAction="#handleButtonConfirmar" text="Confirmar" />
    </children>
 </AnchorPane>
