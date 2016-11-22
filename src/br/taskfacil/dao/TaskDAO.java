@@ -45,8 +45,8 @@ public class TaskDAO {
 		return list;
 
 	}
-	
-	public boolean findSpecific(Task task){
+
+	public boolean findSpecific(Task task) {
 		boolean contem;
 		this.manager.getTransaction().begin();
 		contem = this.manager.contains(task);

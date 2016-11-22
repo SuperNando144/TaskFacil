@@ -1,16 +1,23 @@
 package br.taskfacil.models;
 
+import java.util.List;
+
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Task {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private int id;
 	@Column(length = 64)
 	private String title;
 	@Column(length = 64)
@@ -19,7 +26,23 @@ public class Task {
 	private String location;
 	@Column(length = 10)
 	private String realizationDate;
-	private String collaborators;
+
+	@Access(AccessType.PROPERTY)
+	@ManyToMany
+	@JoinTable(name = "UserTask",
+	joinColumns={@JoinColumn(name="UserId")},
+	inverseJoinColumns = {@JoinColumn(name="TaskId")})
+	private List users;
+	
+	public Task(int id, String title, String description, String location, String realizationDate
+			) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.description = description;
+		this.location = location;
+		this.realizationDate = realizationDate;
+	}
 
 	public String getLocation() {
 		return location;
@@ -29,11 +52,11 @@ public class Task {
 		this.location = location;
 	}
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -61,18 +84,18 @@ public class Task {
 		this.realizationDate = realizationDate;
 	}
 
-	public String getCollaborators() {
-		return collaborators;
+	public List getUsers() {
+		return users;
 	}
 
-	public void setCollaborators(String collaborators) {
-		this.collaborators = collaborators;
+	public void setUsers(List users) {
+		this.users = users;
 	}
 
 	@Override
 	public String toString() {
 		return "Task [id=" + id + ", title=" + title + ", description=" + description + ", realizationDate="
-				+ realizationDate + ", collaborators=" + collaborators + "]";
+				+ realizationDate + ", collaborators=" + "]";
 	}
 
 }
