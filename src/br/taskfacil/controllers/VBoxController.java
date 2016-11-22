@@ -72,11 +72,9 @@ public class VBoxController {
 		boolean entrou = false;
 
 		Integer b = passwordFieldSenha.getText().hashCode();
-		System.out.println(b);
+		User user = new User(textFieldEmail.getText(), b.toString());
 
-		List<User> listaUsuarios = dao.findAll();
-		for (User u : listaUsuarios) {
-			if ((u.getEmail().equals(textFieldEmail.getText()) && (Integer.parseInt(u.getPassword()) == b))) {
+			if (dao.findPassword(user)) {
 				
 				
 				FXMLLoader loader = new FXMLLoader();
@@ -99,7 +97,7 @@ public class VBoxController {
 				dialogStage.showAndWait();
 				entrou = true;
 			}
-		}
+		
 
 		if (!entrou) {
 			Alert errorAlert = new Alert(Alert.AlertType.ERROR);

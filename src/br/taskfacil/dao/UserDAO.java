@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import br.taskfacil.db.JPAUtil;
+import br.taskfacil.models.Task;
 import br.taskfacil.models.User;
 
 public class UserDAO {
@@ -45,13 +46,21 @@ public class UserDAO {
 		return list;
 
 	}
-	
-	public boolean findSpecific(User user){
-		boolean contem;
-		this.manager.getTransaction().begin();
-		contem = this.manager.contains(user);
-		this.manager.getTransaction().commit();
-		return contem;
+
+	public boolean findPassword(User user) {
+		List rows = null;
+		Query query = manager.createQuery("Select password from User where email=:email");
+		query.setParameter("email", user.getEmail());
+		rows = query.getResultList();
+		if (rows.isEmpty()) {
+			return false;
+		} else {
+			if (rows.get(0).toString().equals(user.getPassword())) {
+				return true;
+			}
+
+		}
+		return false;
 	}
 
 }

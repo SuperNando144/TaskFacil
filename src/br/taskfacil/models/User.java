@@ -19,28 +19,27 @@ import javax.persistence.Table;
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 	@Column(length = 64)
 	private String nome;
 	@Column(length = 64)
 	private String email;
 	@Column(length = 64)
 	private String password;
-	@Access(AccessType.PROPERTY)
-	@ManyToMany
-	@JoinTable(name = "UserTask",
-		joinColumns={@JoinColumn(name="TaskId")},
-		inverseJoinColumns = {@JoinColumn(name="UserId")})
-	private List tasks;
 	
 	public User(String nome, String email, String password) {
 		this.nome = nome;
 		this.email = email;
 		this.password = password;
 	}
+	
+	public User(String email, String password) {
+		this.email = email;
+		this.password = password;
+	}
 
 	public User() {
-		this.id = -1;
+		this.id = -1L;
 	}
 
 	public String getNome() {
@@ -51,11 +50,11 @@ public class User {
 		this.nome = nome;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -75,14 +74,6 @@ public class User {
 		this.password = password;
 	}
 	
-
-	public List getTasks() {
-		return tasks;
-	}
-
-	public void setTasks(List tasks) {
-		this.tasks = tasks;
-	}
 
 	@Override
 	public String toString() {

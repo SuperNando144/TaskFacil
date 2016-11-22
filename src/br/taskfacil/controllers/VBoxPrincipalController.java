@@ -52,9 +52,10 @@ public class VBoxPrincipalController implements Initializable {
 	private ObservableList<Task> taskObservableList;
 	private User user;
 	private TaskDAO dao;
-	
-	public void setUser(User user){
+
+	public void setUser(User user) {
 		this.user = user;
+		System.out.println(user.getNome());
 		this.labelNome.setText(user.getNome());
 	}
 
@@ -67,11 +68,10 @@ public class VBoxPrincipalController implements Initializable {
 		this.dao = new TaskDAO();
 		loadTableViewTask();
 
-	
 	}
-	
+
 	private void loadTableViewTask() {
-		//this.taskList = (ArrayList<Task>) this.dao.findSpecific(task);
+		this.taskList = (ArrayList<Task>) this.dao.findAll();
 
 		this.tableColumnTitulo.setCellValueFactory(new PropertyValueFactory<>("title"));
 		this.tableColumnData.setCellValueFactory(new PropertyValueFactory<>("realizationDate"));
@@ -82,7 +82,6 @@ public class VBoxPrincipalController implements Initializable {
 		this.tableViewTarefas.setItems(this.taskObservableList);
 
 	}
-
 
 	@FXML
 	public void handleMenuItemEditar() throws IOException {

@@ -17,7 +17,7 @@ import javax.persistence.ManyToMany;
 public class Task {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 	@Column(length = 64)
 	private String title;
 	@Column(length = 64)
@@ -26,22 +26,18 @@ public class Task {
 	private String location;
 	@Column(length = 10)
 	private String realizationDate;
+	private Long idOwner;
 
-	@Access(AccessType.PROPERTY)
-	@ManyToMany
-	@JoinTable(name = "UserTask",
-	joinColumns={@JoinColumn(name="UserId")},
-	inverseJoinColumns = {@JoinColumn(name="TaskId")})
-	private List users;
-	
-	public Task(int id, String title, String description, String location, String realizationDate
-			) {
+	public Task(String title, String description, String location, String realizationDate) {
 		super();
-		this.id = id;
 		this.title = title;
 		this.description = description;
 		this.location = location;
 		this.realizationDate = realizationDate;
+	}
+	
+	public Task(){
+		this.id = -1L;
 	}
 
 	public String getLocation() {
@@ -52,11 +48,11 @@ public class Task {
 		this.location = location;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -84,18 +80,18 @@ public class Task {
 		this.realizationDate = realizationDate;
 	}
 
-	public List getUsers() {
-		return users;
+	public Long getIdOwner() {
+		return idOwner;
 	}
 
-	public void setUsers(List users) {
-		this.users = users;
+	public void setIdOwner(Long idOwner) {
+		this.idOwner = idOwner;
 	}
 
 	@Override
 	public String toString() {
-		return "Task [id=" + id + ", title=" + title + ", description=" + description + ", realizationDate="
-				+ realizationDate + ", collaborators=" + "]";
+		return "Task [id=" + id + ", title=" + title + ", description=" + description + ", location=" + location
+				+ ", realizationDate=" + realizationDate + ", idOwner=" + idOwner + "]";
 	}
 
 }
