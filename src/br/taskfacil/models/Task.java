@@ -8,15 +8,26 @@ import javax.persistence.Id;
 
 @Entity
 public class Task {
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(length=64)
+	@Column(length = 64)
 	private String title;
-	@Column(length=64)
+	@Column(length = 64)
 	private String description;
-	@Column(length=10)
+	@Column(length = 64)
+	private String location;
+	@Column(length = 10)
 	private String realizationDate;
 	private String collaborators;
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
 
 	public Long getId() {
 		return id;

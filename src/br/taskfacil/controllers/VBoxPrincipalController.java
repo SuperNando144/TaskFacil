@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -17,6 +18,8 @@ public class VBoxPrincipalController implements Initializable {
 	Label labelNome;
 	@FXML
 	Menu menuLista;
+	@FXML
+	MenuItem menuItemEditar;
 	@FXML
 	private AnchorPane anchorPane;
 
@@ -32,15 +35,14 @@ public class VBoxPrincipalController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@FXML
-	public void handleMenuTarefa() throws IOException {
+	public void handleMenuItemEditar() throws IOException {
 		System.out.println("*****************************");
 		AnchorPane ap = (AnchorPane) FXMLLoader
-				.load(getClass().getResource("/br/taskfacil/AnchorPaneCadastroTarefa.fxml"));
+				.load(getClass().getResource("/br/taskfacil/views/AnchorPaneCadastroTarefa.fxml"));
 		this.anchorPane.getChildren().setAll(ap);
 	}
 }

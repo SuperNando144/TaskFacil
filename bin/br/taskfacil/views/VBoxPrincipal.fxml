@@ -3,26 +3,24 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="454.0" prefWidth="611.0" xmlns="http://javafx.com/javafx/8.0.101" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.taskfacil.controllers.VBoxPrincipalController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="454.0" prefWidth="611.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.taskfacil.controllers.VBoxPrincipalController">
    <children>
       <MenuBar>
         <menus>
-          <Menu fx:id="menuLista" mnemonicParsing="false" text="Tarefas" />
+          <Menu fx:id="menuLista" mnemonicParsing="false" text="Tarefas">
+               <items>
+                  <MenuItem fx:id="menuItemEditar" mnemonicParsing="false" onAction="#handleMenuItemEditar" text="Editar" />
+               </items></Menu>
         </menus>
       </MenuBar>
       <AnchorPane fx:id="anchorPane" prefHeight="430.0" prefWidth="611.0">
          <children>
-            <Label layoutX="47.0" layoutY="125.0" text="Bem-Vindo ao Task Fácil,">
-               <font>
-                  <Font size="48.0" />
-               </font>
-            </Label>
-            <Label fx:id="labelNome" layoutX="167.0" layoutY="195.0" prefHeight="86.0" prefWidth="288.0" text="labelNome">
+            <Label layoutX="47.0" layoutY="125.0" text="Bem-Vindo ao Task Fácil!">
                <font>
                   <Font size="48.0" />
                </font>

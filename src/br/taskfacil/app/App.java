@@ -19,7 +19,6 @@ public class App extends Application {
 		stage.setTitle("TaskFacil - Login");
 
 		VBoxController controller = new VBoxController();
-		controller.setDialogStage(stage);
 
 		stage.show();
 	}

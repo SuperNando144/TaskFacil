@@ -39,7 +39,6 @@ public class VBoxController implements Initializable {
 	@FXML
 	private PasswordField passwordFieldSenha;
 
-	private Stage dialogStage;
 	private UserDAO dao = new UserDAO();
 	private static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern
 			.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
@@ -47,10 +46,6 @@ public class VBoxController implements Initializable {
 	@FXML
 	public void handleMenuItemSobre() throws IOException {
 		System.out.println("*****************************");
-	}
-
-	public void setDialogStage(Stage dialogStage) {
-		this.dialogStage = dialogStage;
 	}
 
 	@FXML
@@ -77,14 +72,15 @@ public class VBoxController implements Initializable {
 
 			Integer b = passwordFieldSenha.getText().hashCode();
 			System.out.println(b);
-			
+
 			List<User> listaUsuarios = dao.findAll();
 			for (User u : listaUsuarios) {
 				if ((u.getEmail().equals(textFieldEmail.getText()) && (Integer.parseInt(u.getPassword()) == b))) {
-					
+
 					FXMLLoader loader = new FXMLLoader();
 					loader.setLocation(AnchorPaneCadastroUsuarioDialogController.class
 							.getResource("/br/taskfacil/views/VBoxPrincipal.fxml"));
+
 					VBox page = (VBox) loader.load();
 
 					Stage dialogStage = new Stage();
@@ -94,15 +90,14 @@ public class VBoxController implements Initializable {
 
 					VBoxPrincipalController controller = loader.getController();
 					controller.setDialogStage(dialogStage);
-
+					Stage stage = (Stage) buttonEntrar.getScene().getWindow();
+					stage.close();
 					dialogStage.showAndWait();
-					
-					this.dialogStage.close();
 
 				}
 			}
 
-		}else{
+		} else {
 			Alert errorAlert = new Alert(Alert.AlertType.ERROR);
 			errorAlert.setHeaderText("Informação Incorreta!");
 			errorAlert.setContentText("Email e/ou Senha incorreto(s)!");
