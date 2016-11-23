@@ -35,6 +35,8 @@ public class VBoxPrincipalController implements Initializable {
 	@FXML
 	Button buttonLogout;
 	@FXML
+	Button buttonCarregar;
+	@FXML
 	private AnchorPane anchorPane;
 	@FXML
 	private TableView<Task> tableViewTarefas;
@@ -52,27 +54,27 @@ public class VBoxPrincipalController implements Initializable {
 	private ObservableList<Task> taskObservableList;
 	private User user;
 	private TaskDAO dao;
-
 	public void setUser(User user) {
 		this.user = user;
-		System.out.println(user.getNome());
+		System.out.println("----------------");
 		this.labelNome.setText(user.getNome());
 	}
 
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage = dialogStage;
 	}
+	
+
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
 		this.dao = new TaskDAO();
-		loadTableViewTask();
 
 	}
 
 	private void loadTableViewTask() {
-		this.taskList = (ArrayList<Task>) this.dao.findAll();
-
+		this.taskList = (ArrayList<Task>) this.dao.findSpecific(user);
 		this.tableColumnTitulo.setCellValueFactory(new PropertyValueFactory<>("title"));
 		this.tableColumnData.setCellValueFactory(new PropertyValueFactory<>("realizationDate"));
 		this.tableColumnDescricao.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -83,6 +85,11 @@ public class VBoxPrincipalController implements Initializable {
 
 	}
 
+	@FXML
+	public void handleButtonCarregar() throws IOException {
+		loadTableViewTask();
+	}
+	
 	@FXML
 	public void handleMenuItemEditar() throws IOException {
 		AnchorPane ap = (AnchorPane) FXMLLoader

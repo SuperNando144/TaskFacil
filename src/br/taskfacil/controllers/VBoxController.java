@@ -38,8 +38,8 @@ public class VBoxController {
 	private TextField textFieldEmail;
 	@FXML
 	private PasswordField passwordFieldSenha;
+
 	
-	private VBoxPrincipalController controller;
 	private UserDAO dao = new UserDAO();
 	private static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern
 			.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
@@ -69,35 +69,36 @@ public class VBoxController {
 
 	@FXML
 	public void handleButtonEntrar() throws IOException {
+		VBoxPrincipalController controller;
 		boolean entrou = false;
 
 		Integer b = passwordFieldSenha.getText().hashCode();
 		User user = new User(textFieldEmail.getText(), b.toString());
 
-			if (dao.findPassword(user)) {
-				
-				
-				FXMLLoader loader = new FXMLLoader();
-				loader.setLocation(AnchorPaneCadastroUsuarioDialogController.class
-						.getResource("/br/taskfacil/views/VBoxPrincipal.fxml"));
+		if (dao.findPassword(user)) {
 
-				VBox page = (VBox) loader.load();
-
-				Stage dialogStage = new Stage();
-				dialogStage.setTitle("TaskFácil - Menu Principal");
-				Scene scene = new Scene(page);
-				dialogStage.setScene(scene);
-				
-				controller = loader.getController();
-				
-				//controller.setUser(u);
-				controller.setDialogStage(dialogStage);
-				Stage stage = (Stage) buttonEntrar.getScene().getWindow();
-				stage.close();
-				dialogStage.showAndWait();
-				entrou = true;
-			}
-		
+			user.setNome(dao.findName(user));
+			user.setId(dao.findId(user));
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(AnchorPaneCadastroUsuarioDialogController.class
+					.getResource("/br/taskfacil/views/VBoxPrincipal.fxml"));
+			
+			
+			VBox page = (VBox) loader.load();
+			
+			Stage dialogStage = new Stage();
+			dialogStage.setTitle("TaskFácil - Menu Principal");
+			Scene scene = new Scene(page);
+			
+			controller = loader.getController();
+			controller.setUser(user);
+			dialogStage.setScene(scene);
+			controller.setDialogStage(dialogStage);
+			Stage stage = (Stage) buttonEntrar.getScene().getWindow();
+			stage.close();
+			dialogStage.showAndWait();
+			entrou = true;
+		}
 
 		if (!entrou) {
 			Alert errorAlert = new Alert(Alert.AlertType.ERROR);

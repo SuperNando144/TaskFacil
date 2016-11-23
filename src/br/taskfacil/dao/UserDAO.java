@@ -46,6 +46,24 @@ public class UserDAO {
 		return list;
 
 	}
+	
+	public String findName(User user) {
+		List list;
+		Query query = manager.createQuery("Select nome from User where email=:email");
+		query.setParameter("email", user.getEmail());
+		list = query.getResultList();
+		return list.get(0).toString();
+
+	}
+	
+	public Long findId(User user) {
+		List list;
+		Query query = manager.createQuery("Select id from User where email=:email");
+		query.setParameter("email", user.getEmail());
+		list = query.getResultList();
+		return Long.parseLong(list.get(0).toString());
+
+	}
 
 	public boolean findPassword(User user) {
 		List rows = null;
@@ -61,6 +79,22 @@ public class UserDAO {
 
 		}
 		return false;
+	}
+
+	public boolean findEmail(String email) {
+		List rows = null;
+		Query query = manager.createQuery("Select email from User where email=:email");
+		query.setParameter("email", email);
+		rows = query.getResultList();
+
+		if (rows.isEmpty()) {
+			return false;
+		} else {
+
+			return true;
+
+		}
+
 	}
 
 }

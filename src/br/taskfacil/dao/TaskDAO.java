@@ -7,6 +7,7 @@ import javax.persistence.Query;
 
 import br.taskfacil.db.JPAUtil;
 import br.taskfacil.models.Task;
+import br.taskfacil.models.User;
 
 public class TaskDAO {
 	private EntityManager manager;
@@ -46,11 +47,14 @@ public class TaskDAO {
 
 	}
 
-	public boolean findSpecific(Task task) {
-		boolean contem;
-		this.manager.getTransaction().begin();
-		contem = this.manager.contains(task);
-		this.manager.getTransaction().commit();
-		return contem;
+	public List<Task> findSpecific (User user) {
+		List<Task> list;
+		Query query = manager.createQuery("from Task t where t.idOwner = :idowner");
+		System.out.println(user);
+		query.setParameter("idowner", user.getId());
+		list = query.getResultList();
+		System.out.println(list);
+		return list;
+
 	}
 }

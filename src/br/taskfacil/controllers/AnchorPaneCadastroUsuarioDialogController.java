@@ -142,16 +142,16 @@ public class AnchorPaneCadastroUsuarioDialogController implements Initializable 
 
 	// Métodos da expressão regular do E-mail
 	public boolean verificateEmail(String email) {
-		List<User> listaUsuarios = dao.findAll();
-		for (User u : listaUsuarios) {
-			if (u.getEmail().equals(email)) {
+		boolean emailFind = dao.findEmail(email);
+		
+			if (emailFind) {
 				Alert errorAlert = new Alert(Alert.AlertType.ERROR);
 				errorAlert.setHeaderText("E-mail já existente!");
 				errorAlert.setContentText("E-mail já existe no sistema!");
 				errorAlert.show();
 				return false;
 			}
-		}
+		
 		if (!validate(email)) {
 
 			Alert errorAlert = new Alert(Alert.AlertType.ERROR);

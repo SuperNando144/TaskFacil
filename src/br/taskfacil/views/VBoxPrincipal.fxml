@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.101" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.taskfacil.controllers.VBoxPrincipalController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="562.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.101" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.taskfacil.controllers.VBoxPrincipalController">
    <children>
       <MenuBar>
         <menus>
@@ -21,7 +21,7 @@
                </items></Menu>
         </menus>
       </MenuBar>
-      <AnchorPane fx:id="anchorPane" prefHeight="507.0" prefWidth="627.0">
+      <AnchorPane fx:id="anchorPane" prefHeight="533.0" prefWidth="640.0">
          <children>
             <Label layoutX="122.0" text="Bem-Vindo ao Task Fácil!">
                <font>
@@ -38,7 +38,7 @@
                   <Font size="28.0" />
                </font>
             </Label>
-            <TableView fx:id="tableViewTarefas" layoutX="15.0" layoutY="102.0" prefHeight="349.0" prefWidth="610.0">
+            <TableView fx:id="tableViewTarefas" layoutX="17.0" layoutY="130.0" prefHeight="349.0" prefWidth="610.0">
               <columns>
                 <TableColumn fx:id="tableColumnTitulo" prefWidth="112.0" text="Titulo" />
                 <TableColumn fx:id="tableColumnDescricao" prefWidth="206.0" text="Descrição" />
@@ -46,7 +46,8 @@
                   <TableColumn fx:id="tableColumnData" minWidth="0.0" prefWidth="102.0" text="Data" />
               </columns>
             </TableView>
-            <Button fx:id="buttonLogout" layoutX="295.0" layoutY="467.0" mnemonicParsing="false" onAction="#handleButtonLogout" text="Logout" />
+            <Button fx:id="buttonLogout" layoutX="295.0" layoutY="494.0" mnemonicParsing="false" onAction="#handleButtonLogout" text="Logout" />
+            <Button fx:id="buttonCarregar" layoutX="270.0" layoutY="93.0" mnemonicParsing="false" onAction="#handleButtonCarregar" text="Carregar agenda" />
          </children>
       </AnchorPane>
    </children>
