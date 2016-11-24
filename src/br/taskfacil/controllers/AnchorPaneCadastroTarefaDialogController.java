@@ -42,10 +42,14 @@ public class AnchorPaneCadastroTarefaDialogController implements Initializable {
 
 	public void initData(User user, Task task, int acao) {
 		this.user = user;
-		System.out.println(this.user);
 		this.task = task;
-		System.out.println(this.task);
 		this.acao = acao;
+		if (acao == 1) {
+			this.textFieldTitulo.setText(this.task.getTitle());
+			this.textFieldData.setText(this.task.getRealizationDate());
+			this.textFieldLocal.setText(this.task.getLocation());
+			this.textAreaDescricao.setText(this.task.getDescription());
+		}
 	}
 
 	@Override
@@ -56,14 +60,21 @@ public class AnchorPaneCadastroTarefaDialogController implements Initializable {
 	@FXML
 	public void handleButtonConfirmar() {
 		if (acao == 0) {
-			this.task = new Task(textFieldTitulo.getText(), textAreaDescricao.getText(), textFieldLocal.getText(), textFieldData.getText());
+			this.task = new Task(textFieldTitulo.getText(), textAreaDescricao.getText(), textFieldLocal.getText(),
+					textFieldData.getText());
 			this.task.setIdOwner(this.user);
-			
+
 			System.out.println(this.task.toString());
-			
+
 			dao.insert(this.task);
 		} else {
+			this.task.setTitle(textFieldTitulo.getText());
+			this.task.setDescription(textAreaDescricao.getText());
+			this.task.setLocation(textFieldLocal.getText());
+			this.task.setRealizationDate(textFieldData.getText());
+			System.out.println(this.task.toString());
 
+			dao.update(task);
 		}
 
 		this.dialogStage.close();

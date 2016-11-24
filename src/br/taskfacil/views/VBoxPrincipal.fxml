@@ -11,15 +11,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="562.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.taskfacil.controllers.VBoxPrincipalController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="562.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.101" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.taskfacil.controllers.VBoxPrincipalController">
    <children>
       <MenuBar>
         <menus>
           <Menu fx:id="menuLista" mnemonicParsing="false" text="Ações">
                <items>
-                  <MenuItem fx:id="menuItemAdicionar"  onAction="#handleMenuItemAdicionar" mnemonicParsing="false" text="Adicionar" />
-                  <MenuItem mnemonicParsing="false" text="Editar" />
-                  <MenuItem fx:id="menuItemExcluir" mnemonicParsing="false" text="Excluir" />
+                  <MenuItem fx:id="menuItemAdicionar" mnemonicParsing="false" onAction="#handleMenuItemAdicionar" text="Adicionar" />
+                  <MenuItem fx:id="menuItemEditar" mnemonicParsing="false" onAction="#handleMenuItemEditar" text="Editar" />
+                  <MenuItem fx:id="menuItemExcluir" mnemonicParsing="false" onAction="#handleMenuItemExcluir" text="Excluir" />
                   <MenuItem fx:id="menuItemLogout" mnemonicParsing="false" onAction="#handleMenuItemLogout" text="Logout" />
                </items></Menu>
         </menus>

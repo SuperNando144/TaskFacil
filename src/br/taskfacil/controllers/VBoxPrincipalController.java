@@ -3,6 +3,7 @@ package br.taskfacil.controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import br.taskfacil.dao.TaskDAO;
@@ -14,7 +15,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
@@ -61,7 +64,6 @@ public class VBoxPrincipalController implements Initializable {
 
 	public void initData(User user) {
 		this.user = user;
-		System.out.println("----------------");
 		this.labelNome.setText(user.getNome());
 
 		loadTableViewTask();
@@ -80,6 +82,7 @@ public class VBoxPrincipalController implements Initializable {
 
 	private void loadTableViewTask() {
 		this.taskList = (ArrayList<Task>) this.dao.findSpecific(user);
+		System.out.println(this.taskList);
 		this.tableColumnTitulo.setCellValueFactory(new PropertyValueFactory<>("title"));
 		this.tableColumnData.setCellValueFactory(new PropertyValueFactory<>("realizationDate"));
 		this.tableColumnDescricao.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -114,6 +117,57 @@ public class VBoxPrincipalController implements Initializable {
 
 		dialogStage.showAndWait();
 
+	}
+	
+	@FXML
+	public void handleMenuItemEditar() throws IOException {
+		Task task = this.tableViewTarefas.getSelectionModel().getSelectedItem();
+		if(task==null){
+			Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+			errorAlert.setHeaderText("Selecione uma tarefa!");
+			errorAlert.setContentText("Selecione uma tarefa antes de editar!");
+			errorAlert.show();
+		}else{
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(AnchorPaneCadastroTarefaDialogController.class
+					.getResource("/br/taskfacil/views/AnchorPaneCadastroTarefaDialog.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+
+			Stage dialogStage = new Stage();
+			dialogStage.setTitle("TaskFácil - Cadastro de Usuário");
+			Scene scene = new Scene(page);
+			dialogStage.setScene(scene);
+
+			AnchorPaneCadastroTarefaDialogController controller = loader.getController();
+			
+			controller.initData(this.user, task, 1);
+			controller.setDialogStage(dialogStage);
+
+			dialogStage.showAndWait();
+		}
+		
+
+	}
+	
+	@FXML
+	public void handleMenuItemExcluir() throws IOException{
+		Task task = this.tableViewTarefas.getSelectionModel().getSelectedItem();
+		if(task==null){
+			Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+			errorAlert.setHeaderText("Selecione uma tarefa!");
+			errorAlert.setContentText("Selecione uma tarefa antes de excluir!");
+			errorAlert.show();
+		}else{
+			Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+			confirmationAlert.setHeaderText("Remoção de Tarefa");
+			confirmationAlert.setContentText("Deseja realmente apagar essa tarefa?");
+			
+			Optional<ButtonType> result = confirmationAlert.showAndWait();
+			if (result.get() == ButtonType.OK) {
+				this.dao.delete(task);
+				loadTableViewTask();
+			}
+		}
 	}
 
 	@FXML
