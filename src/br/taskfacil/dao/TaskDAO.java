@@ -47,13 +47,11 @@ public class TaskDAO {
 
 	}
 
-	public List<Task> findSpecific (User user) {
+	public List<Task> findSpecific(User user) {
 		List<Task> list;
-		Query query = manager.createQuery("from Task t where t.idOwner = :idowner");
-		System.out.println(user);
-		query.setParameter("idowner", user.getId());
+		Query query = manager.createQuery("select t from Task t where idowner_id = :idowner_id");
+		query.setParameter("idowner_id", user.getId());
 		list = query.getResultList();
-		System.out.println(list);
 		return list;
 
 	}

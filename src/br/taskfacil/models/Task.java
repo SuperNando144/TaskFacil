@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Task {
@@ -26,10 +27,11 @@ public class Task {
 	private String location;
 	@Column(length = 10)
 	private String realizationDate;
-	private Long idOwner;
+	
+	@ManyToOne
+	private User idOwner;
 
 	public Task(String title, String description, String location, String realizationDate) {
-		super();
 		this.title = title;
 		this.description = description;
 		this.location = location;
@@ -37,7 +39,7 @@ public class Task {
 	}
 	
 	public Task(){
-		this.id = -1L;
+//		this.id = -1L;
 	}
 
 	public String getLocation() {
@@ -80,11 +82,11 @@ public class Task {
 		this.realizationDate = realizationDate;
 	}
 
-	public Long getIdOwner() {
+	public User getIdOwner() {
 		return idOwner;
 	}
 
-	public void setIdOwner(Long idOwner) {
+	public void setIdOwner(User idOwner) {
 		this.idOwner = idOwner;
 	}
 

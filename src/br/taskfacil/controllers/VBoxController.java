@@ -91,7 +91,7 @@ public class VBoxController {
 			Scene scene = new Scene(page);
 			
 			controller = loader.getController();
-			controller.setUser(user);
+			controller.initData(user);
 			dialogStage.setScene(scene);
 			controller.setDialogStage(dialogStage);
 			Stage stage = (Stage) buttonEntrar.getScene().getWindow();

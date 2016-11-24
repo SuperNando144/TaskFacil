@@ -31,9 +31,13 @@ public class VBoxPrincipalController implements Initializable {
 	@FXML
 	Menu menuLista;
 	@FXML
+	MenuItem menuItemAdicionar;
+	@FXML
 	MenuItem menuItemEditar;
 	@FXML
-	Button buttonLogout;
+	MenuItem menuItemExcluir;
+	@FXML
+	MenuItem menuItemLogout;
 	@FXML
 	Button buttonCarregar;
 	@FXML
@@ -54,21 +58,22 @@ public class VBoxPrincipalController implements Initializable {
 	private ObservableList<Task> taskObservableList;
 	private User user;
 	private TaskDAO dao;
-	public void setUser(User user) {
+
+	public void initData(User user) {
 		this.user = user;
 		System.out.println("----------------");
 		this.labelNome.setText(user.getNome());
+
+		loadTableViewTask();
 	}
 
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage = dialogStage;
 	}
-	
-
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+
 		this.dao = new TaskDAO();
 
 	}
@@ -89,16 +94,30 @@ public class VBoxPrincipalController implements Initializable {
 	public void handleButtonCarregar() throws IOException {
 		loadTableViewTask();
 	}
-	
+
 	@FXML
-	public void handleMenuItemEditar() throws IOException {
-		AnchorPane ap = (AnchorPane) FXMLLoader
-				.load(getClass().getResource("/br/taskfacil/views/AnchorPaneCadastroTarefa.fxml"));
-		this.anchorPane.getChildren().setAll(ap);
+	public void handleMenuItemAdicionar() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(AnchorPaneCadastroTarefaDialogController.class
+				.getResource("/br/taskfacil/views/AnchorPaneCadastroTarefaDialog.fxml"));
+		AnchorPane page = (AnchorPane) loader.load();
+
+		Stage dialogStage = new Stage();
+		dialogStage.setTitle("TaskFácil - Cadastro de Usuário");
+		Scene scene = new Scene(page);
+		dialogStage.setScene(scene);
+
+		AnchorPaneCadastroTarefaDialogController controller = loader.getController();
+		
+		controller.initData(this.user, null, 0);
+		controller.setDialogStage(dialogStage);
+
+		dialogStage.showAndWait();
+
 	}
 
 	@FXML
-	public void handleButtonLogout() throws IOException {
+	public void handleMenuItemLogout() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(
 				AnchorPaneCadastroUsuarioDialogController.class.getResource("/br/taskfacil/views/VBoxApp.fxml"));
