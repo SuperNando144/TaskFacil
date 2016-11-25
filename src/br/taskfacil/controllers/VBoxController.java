@@ -21,11 +21,13 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class VBoxController {
+public class VBoxController implements Initializable {
 	@FXML
 	private Menu menuAjuda;
 	@FXML
@@ -38,6 +40,8 @@ public class VBoxController {
 	private TextField textFieldEmail;
 	@FXML
 	private PasswordField passwordFieldSenha;
+	@FXML
+	ImageView imageViewLogo;
 
 	
 	private UserDAO dao = new UserDAO();
@@ -46,7 +50,10 @@ public class VBoxController {
 
 	@FXML
 	public void handleMenuItemSobre() throws IOException {
-		System.out.println("*****************************");
+		Alert errorAlert = new Alert(Alert.AlertType.INFORMATION);
+		errorAlert.setHeaderText("Sobre!");
+		errorAlert.setContentText("Programinha para a matéria de Arquitetura de Software dos professores Samuka e Joice :)");
+		errorAlert.show();
 	}
 
 	@FXML
@@ -107,6 +114,12 @@ public class VBoxController {
 			errorAlert.show();
 		}
 
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		imageViewLogo.setImage(new Image("file:images/taskFacil.png"));
+		
 	}
 
 }

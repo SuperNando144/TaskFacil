@@ -27,9 +27,14 @@ public class Task {
 	private String location;
 	@Column(length = 10)
 	private String realizationDate;
-	
+
 	@ManyToOne
 	private User idOwner;
+
+	@ManyToMany
+	@JoinTable(name = "TaskUser", joinColumns = { @JoinColumn(name = "task_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "user_id") })
+	private List users;
 
 	public Task(String title, String description, String location, String realizationDate) {
 		this.title = title;
@@ -37,9 +42,9 @@ public class Task {
 		this.location = location;
 		this.realizationDate = realizationDate;
 	}
-	
-	public Task(){
-//		this.id = -1L;
+
+	public Task() {
+		// this.id = -1L;
 	}
 
 	public String getLocation() {
@@ -88,6 +93,14 @@ public class Task {
 
 	public void setIdOwner(User idOwner) {
 		this.idOwner = idOwner;
+	}
+
+	public List getUser() {
+		return users;
+	}
+
+	public void setUser(List users) {
+		this.users = users;
 	}
 
 	@Override
