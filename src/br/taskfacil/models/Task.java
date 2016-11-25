@@ -32,9 +32,7 @@ public class Task {
 	private User idOwner;
 
 	@ManyToMany
-	@JoinTable(name = "TaskUser", joinColumns = { @JoinColumn(name = "task_id") }, inverseJoinColumns = {
-			@JoinColumn(name = "user_id") })
-	private List users;
+	private List<User> collaborators;
 
 	public Task(String title, String description, String location, String realizationDate) {
 		this.title = title;
@@ -95,12 +93,12 @@ public class Task {
 		this.idOwner = idOwner;
 	}
 
-	public List getUser() {
-		return users;
+	public List<User> getCollaborators() {
+		return collaborators;
 	}
 
-	public void setUser(List users) {
-		this.users = users;
+	public void setCollaborators(List<User> collaborators) {
+		this.collaborators = collaborators;
 	}
 
 	@Override

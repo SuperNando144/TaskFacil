@@ -27,8 +27,8 @@ public class User {
 	@Column(length = 64)
 	private String password;
 
-	@ManyToMany(mappedBy = "users")
-	private List task;
+//	@ManyToMany(mappedBy = "users")
+//	private List task;
 
 	public User(String nome, String email, String password) {
 		this.nome = nome;
@@ -77,13 +77,13 @@ public class User {
 		this.password = password;
 	}
 
-	public List getTask() {
-		return task;
-	}
-
-	public void setTask(List task) {
-		this.task = task;
-	}
+//	public List getTask() {
+//		return task;
+//	}
+//
+//	public void setTask(List task) {
+//		this.task = task;
+//	}
 
 	@Override
 	public String toString() {
