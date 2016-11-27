@@ -1,5 +1,6 @@
 package br.taskfacil.models;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Access;
@@ -14,6 +15,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.Type;
+
 @Entity
 public class Task {
 	@Id
@@ -25,8 +28,8 @@ public class Task {
 	private String description;
 	@Column(length = 64)
 	private String location;
-	@Column(length = 10)
-	private String realizationDate;
+	@Type(type="date")
+	private Date realizationDate;
 
 	@ManyToOne
 	private User idOwner;
@@ -34,7 +37,7 @@ public class Task {
 	@ManyToMany
 	private List<User> collaborators;
 
-	public Task(String title, String description, String location, String realizationDate) {
+	public Task(String title, String description, String location, Date realizationDate) {
 		this.title = title;
 		this.description = description;
 		this.location = location;
@@ -42,7 +45,7 @@ public class Task {
 	}
 
 	public Task() {
-		// this.id = -1L;
+		this.id = -1L;
 	}
 
 	public String getLocation() {
@@ -77,11 +80,11 @@ public class Task {
 		this.description = description;
 	}
 
-	public String getRealizationDate() {
+	public Date getRealizationDate() {
 		return realizationDate;
 	}
 
-	public void setRealizationDate(String realizationDate) {
+	public void setRealizationDate(Date realizationDate) {
 		this.realizationDate = realizationDate;
 	}
 
